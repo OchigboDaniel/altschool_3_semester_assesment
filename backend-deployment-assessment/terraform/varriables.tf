@@ -29,3 +29,19 @@ variable "private_subnet_cidrs" {
   type        = list(string)
   default     = ["10.0.3.0/24", "10.0.4.0/24"]
 }
+
+variable "my_ip" {
+  description = "current public IP address in CIDR notation"
+  type        = string
+}
+
+variable "key_pair_name" {
+  description = "Name of the AWS key pair to use for SSH access"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "EC2 instance type for all servers"
+  type        = string
+  default     = "t3.micro"
+}
