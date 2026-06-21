@@ -1,0 +1,7 @@
+.git
+.gitignore
+*.md
+.env
+.terraform/
+backend-deployment-assessment/terraform/
+evidence/
