@@ -1,6 +1,5 @@
-# ─────────────────────────────────────────
-# STAGE 1: Builder
-# ─────────────────────────────────────────
+
+#Build
 FROM golang:1.25-alpine AS builder
 
 RUN apk add --no-cache git
@@ -15,9 +14,7 @@ COPY Server/MuchToDo/ .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o muchtodo ./cmd/api/main.go
 
-# ─────────────────────────────────────────
-# STAGE 2: Final
-# ─────────────────────────────────────────
+
 FROM alpine:3.19
 
 RUN apk add --no-cache ca-certificates
@@ -28,7 +25,7 @@ WORKDIR /app
 
 COPY --from=builder /app/muchtodo .
 
-# Copy .env.example as .env so viper can find a config file
+# Copy .env.example as .env
 # Real values are overridden by docker-compose environment variables
 COPY --from=builder /app/.env.example .env
 

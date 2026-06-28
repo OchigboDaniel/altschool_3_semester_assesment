@@ -15,7 +15,7 @@ services:
       start_period: 30s
 
   backend:
-    build: .
+    image: danielochigbo/muchtodo-backend:latest
     container_name: startuptech-backend
     restart: unless-stopped
     ports:
