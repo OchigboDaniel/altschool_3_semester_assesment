@@ -27,7 +27,7 @@ COPY --from=builder /app/muchtodo .
 
 # Copy .env.example as .env
 # Real values are overridden by docker-compose environment variables
-COPY --from=builder /app/.env.example .env
+RUN touch .env
 
 RUN chown appuser:appuser /app/muchtodo
 
