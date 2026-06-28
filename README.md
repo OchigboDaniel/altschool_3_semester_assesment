@@ -6,7 +6,7 @@ This project provisions AWS infrastructure using Terraform and containerizes a G
 
 ## Architecture Diagram
 Internet
-![Architecture Diagram](path/to/image.png)
+![Architecture Diagram](https://github.com/OchigboDaniel/altschool_3_semester_assesment/blob/main/evidence/image.png?raw=true)
 
 ---
 
