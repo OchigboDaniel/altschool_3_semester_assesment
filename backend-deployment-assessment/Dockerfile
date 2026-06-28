@@ -1,5 +1,4 @@
-
-#Build
+# STAGE 1: Builder
 FROM golang:1.25-alpine AS builder
 
 RUN apk add --no-cache git
@@ -14,7 +13,7 @@ COPY Server/MuchToDo/ .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o muchtodo ./cmd/api/main.go
 
-
+# STAGE 2: Final
 FROM alpine:3.19
 
 RUN apk add --no-cache ca-certificates
@@ -25,11 +24,9 @@ WORKDIR /app
 
 COPY --from=builder /app/muchtodo .
 
-# Copy .env.example as .env
-# Real values are overridden by docker-compose environment variables
-RUN touch .env
-
-RUN chown appuser:appuser /app/muchtodo
+RUN printf "PORT=8080\nMONGO_URI=mongodb://mongodb:27017\nDB_NAME=much_todo_db\nJWT_SECRET_KEY=changeme\nENABLE_CACHE=false\nLOG_LEVEL=INFO\nLOG_FORMAT=json\n" > .env && \
+    chown appuser:appuser /app/muchtodo && \
+    chown appuser:appuser .env
 
 USER appuser
 
